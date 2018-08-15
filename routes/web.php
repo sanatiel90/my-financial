@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/expenses', 'ExpenseController@create')->name('new_expense');
+Route::post('/expenses', 'ExpenseController@store')->name('store_expense');

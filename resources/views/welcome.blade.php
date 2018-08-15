@@ -5,15 +5,41 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>MyFinancial</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 
-        <!-- Styles -->
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
         <style>
             html, body {
-                background-color: #fff;
+                background-color: #E3F2FD;             
+                font-family: 'Roboto Condensed', sans-serif;
+                margin: 0;
+            }
+
+            .title {
+                margin-top: 50px; 
+                font-size: 60px; 
+                font-style: bolder;
+            }
+
+            .subtitle {
+                margin-top: 10px; 
+                font-size: 24px; 
+                font-style: bolder;
+            }
+
+            
+        </style>
+
+         <!-- Styles -->
+        <!--
+        <style>
+            html, body {
+                background-color: #E3F2FD;
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
@@ -22,7 +48,7 @@
             }
 
             .full-height {
-                height: 100vh;
+                height: 48vh;
             }
 
             .flex-center {
@@ -46,7 +72,8 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 24px;
+                font-style: bolder;
             }
 
             .links > a {
@@ -62,33 +89,39 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .subtitle {
+                font-size: 18px;
+                font-style: bolder;
+            }
+
         </style>
+    -->
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
+            <div class="col-md text-center">
+                
+                <h1 class="col-md title" >MyFinancial</h1>
+                <h3 class="col-md subtitle">Gerencie seus gastos de forma simples!</h3>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="row">             
+                    <div class="col-md"></div>
+                    <div class="col-md">    
+                         @if (Route::has('login')) 
+                            @auth
+                                 <a href="{{ url('/home') }}" class="btn btn-block btn-primary">Ir para a Dashboard</a> 
+                            @else
+                                 <a href="{{ route('login') }}" class="btn btn-block btn-success" style="margin-top: 10px;">Entrar</a> 
+                                 <br>
+                                 <p>Não possui uma conta? Cadastre-se agora!</p>
+                                 <a href="{{ route('register') }}" class="btn btn-block btn-primary">Cadastre-se</a>
+                            @endauth
+                         @endif 
+                    </div>
+                    <div class="col-md"></div>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                
             </div>
         </div>
     </body>
