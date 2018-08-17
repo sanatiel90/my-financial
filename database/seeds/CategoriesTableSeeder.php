@@ -23,7 +23,7 @@ class CategoriesTableSeeder extends Seeder
        		['name_categ' => 'Lazer', 'name_sub_categ' => 'Jogos Eletrônicos', 'description' => 'jogos para pc, celular e consoles'],
        		['name_categ' => 'Lazer', 'name_sub_categ' => 'Outros', 'description' => 'outros gastos lazer'],
 
-			['name_categ' => 'Produto', 'name_sub_categ' => 'Livros', 'description' => 'livros comprados'],
+		  	['name_categ' => 'Produto', 'name_sub_categ' => 'Livros', 'description' => 'livros comprados'],
 			['name_categ' => 'Produto', 'name_sub_categ' => 'Computador', 'description' => 'PC e itens para PC(teclado, mouse, peças, etc)'],
 			['name_categ' => 'Produto', 'name_sub_categ' => 'Vestuário', 'description' => 'roupas, sapatos, etc'],
 			['name_categ' => 'Produto', 'name_sub_categ' => 'Móveis', 'description' => 'armários, camas, colchões, mesas, etc'],

@@ -6,17 +6,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><strong>Nova Despesa</strong></div>
+                <div class="card-header"><strong>Editar Despesa</strong></div>
 
                 <div class="card-body">
-					<form method="POST" action="{{ route('store_expense') }}">
-						@csrf
+                    <form  method="POST" action="{{ route('update_expense') }}">
+                        @csrf
 
-						 <div class="form-group row">
+                         <div class="form-group row">
                             <label for="desc" class="col-md-4 col-form-label text-md-right">{{ __('Descrição') }}</label>
 
                             <div class="col-md-6">
-                                <input id="desc" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" value="{{ old('description') }}" required autofocus>
+                                <input id="desc" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" value="{{ $expense->description }}" required autofocus>
 
                                 @if ($errors->has('description'))
                                     <span class="invalid-feedback" role="alert">
@@ -26,11 +26,11 @@
                             </div>
                         </div>
 
-						 <div class="form-group row">
+                         <div class="form-group row">
                             <label for="val" class="col-md-4 col-form-label text-md-right">{{ __('Valor') }}</label>
 
                             <div class="col-md-6">
-                                <input id="val" type="number" class="form-control{{ $errors->has('value') ? ' is-invalid' : '' }}" name="value" value="{{ old('value') }}" required >
+                                <input id="val" type="number" class="form-control{{ $errors->has('value') ? ' is-invalid' : '' }}" name="value" value="{{ $expense->value }}" required >
 
                                 @if ($errors->has('value'))
                                     <span class="invalid-feedback" role="alert">
@@ -45,9 +45,13 @@
 
                             <div class="col-md-6">
                                 <select name="category_id" class="form-control">
-                                	@foreach($categories as $category)
-                                		<option value="{{ $category->id }}"> {{ $category->name_categ }}/{{ $category->name_sub_categ }} </option>
-                                	@endforeach
+                                    @foreach($categories as $category)
+                                        @if($category->id != $expense->category_id)
+                                            <option value="{{ $category->id }}"> {{ $category->name_categ }}/{{ $category->name_sub_categ }} </option>
+                                        @else
+                                            <option selected value="{{ $category->id }}"> {{ $category->name_categ }}/{{ $category->name_sub_categ }} </option>
+                                        @endif
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -58,8 +62,8 @@
                             <label for="dat" class="col-md-4 col-form-label text-md-right">{{ __('Data') }}</label>
 
                             <div class="col-md-6">
-                                <input id="dat" type="date" class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}" name="data" value="{{ old('data') }}" required autofocus>
-                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                <input id="dat" type="date" class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}" name="data" value="{{ $expense->data }}" required autofocus>
+                                <input type="hidden" name="expense_id" value="{{ $expense->id }}">
 
                                 @if ($errors->has('data'))
                                     <span class="invalid-feedback" role="alert">
@@ -72,7 +76,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-success">
-                                    Cadastrar
+                                    Atualizar
                                 </button>
                                 &nbsp;
                                 <button type="reset" class="btn btn-default">
@@ -82,12 +86,12 @@
                         </div>
 
 
-					</form>                    
+                    </form>                    
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
 @endsection
+
