@@ -30,7 +30,7 @@
                             <label for="val" class="col-md-4 col-form-label text-md-right">{{ __('Valor') }}</label>
 
                             <div class="col-md-6">
-                                <input id="val" type="number" class="form-control{{ $errors->has('value') ? ' is-invalid' : '' }}" name="value" value="{{ old('value') }}" required >
+                                <input id="val"  type="text" pattern="[0-9.]+" title="Apenas valores numéricos. Use ponto para separar casas decimais" class="form-control{{ $errors->has('value') ? ' is-invalid' : '' }}" name="value" value="{{ old('value') }}" required >
 
                                 @if ($errors->has('value'))
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
                             <label for="dat" class="col-md-4 col-form-label text-md-right">{{ __('Data') }}</label>
 
                             <div class="col-md-6">
-                                <input id="dat" type="date" class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}" name="data" value="{{ old('data') }}" required autofocus>
+                                <input id="dat" type="date" class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}" name="data" value="{{  old('data') }}" required >
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
                                 @if ($errors->has('data'))
@@ -82,7 +82,8 @@
                         </div>
 
 
-					</form>                    
+					</form>      
+
                 </div>
             </div>
         </div>

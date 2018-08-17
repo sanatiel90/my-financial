@@ -22,8 +22,8 @@
                     @endif
 
                     <div class="card">
-                        <div class="card-body">
-                        @if(isset($expenses))
+                        <div class="card-body">    
+                        @if(count($expenses) > 0)
                             <p><strong>Suas últimas despesas</strong></p>
                                 <div class="row">
                                     <div class="col-md-3"><strong>Descrição</strong> </div>
@@ -57,7 +57,7 @@
                     
                             <div class="card">
                                 <div class="card-body">
-                                    @if(isset($expenses))
+                                    @if(count($expenses) > 0)
                                         <p>Total de gastos nos últimos 4 meses</p>                                
                                         @foreach($expenses as $expense) 
                                             <div class="row" style="background-color: #90CAF9; margin-top: 3px;">
@@ -81,7 +81,7 @@
                         <div class="col-md">
                             <div class="card">
                                 <div class="card-body">
-                                    @if(isset($expenses))
+                                    @if(count($expenses) > 0)
                                         <p>Categorias com mais despesas</p>                                
                                         <!--Div that will hold the pie chart-->
                                         <!--Div that will hold the pie chart-->

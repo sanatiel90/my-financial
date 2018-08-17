@@ -6,14 +6,16 @@ use Illuminate\Http\Request;
 use App\Expense;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
+use App\Libraries\ExpenseFilter;
 
 class ExpenseController extends Controller
 {
 	public function index()
     {
     	$categories = Category::all();
+        $filterOptions = new ExpenseFilter(); 
     	$expenses = Expense::where('user_id', Auth::user()->id)->latest()->paginate(20);
-    	return view('expense.index', ['expenses' => $expenses, 'categories' => $categories]);
+    	return view('expense.index', ['expenses' => $expenses, 'categories' => $categories, 'filterOptions' => $filterOptions]);
     }	
 
     public function create()
@@ -24,7 +26,7 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
-    	Expense::create($request->all());
+        Expense::create($request->all());
     	return redirect()->action('ExpenseController@index')->with('status', 'Despesa cadastrada com sucesso!');
     }
 
@@ -55,12 +57,12 @@ class ExpenseController extends Controller
     {
     	$dataForm = $request->except('_token');
         $categories = Category::all();
-    	
+    	$filterOptions = new ExpenseFilter(); 
         //criando a qry com os filtros
         $expenses = Expense::where(function($qry) use($request){
     		$qry->where('user_id', Auth::user()->id);
             if(isset($request->filt_desc)){
-    			$qry->where('description', 'like', $request->filt_desc.'%');
+    			$qry->where('description', 'like', '%'.$request->filt_desc.'%');
     		}
 			if(isset($request->filt_dat)){
 				$qry->where('data', $request->filt_dat);
@@ -71,7 +73,11 @@ class ExpenseController extends Controller
     	})->orderBy($this->findOrder($request->filt_order),$this->findAscDesc($request->filt_order))
           ->paginate($request->filt_itens_pag); 
 
-    	return  view('expense.index', ['expenses' => $expenses, 'categories' => $categories, 'dataForm' => $dataForm]);
+    	return  view('expense.index', ['expenses' => $expenses, 
+                                       'categories' => $categories, 
+                                       'dataForm' => $dataForm,
+                                       'filterOptions' => $filterOptions
+                                      ]);
     }
 
 

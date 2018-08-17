@@ -20,12 +20,15 @@
                             <form action="{{ route('search_expense') }}" method="GET" class="form form-inline">    
                                 @csrf
                                 <div class="form-group row">                               
-                                <input type="text" name="filt_desc" value="{{ old('filt_desc') }}" placeholder="Descrição" class="form-control"> &nbsp;&nbsp;
-                                <input type="date" name="filt_dat" class="form-control"> &nbsp;&nbsp;
+                                <input type="text" name="filt_desc" value="@if(isset($dataForm['filt_desc'])){{$dataForm['filt_desc']}}@endif" placeholder="Descrição" class="form-control"> &nbsp;&nbsp;
+                                <input type="date" name="filt_dat" value="@if(isset($dataForm['filt_dat'])){{$dataForm['filt_dat']}}@endif" class="form-control" > &nbsp;&nbsp;
                                 <select name="filt_cat" class="form-control">
                                     <option value="0">--Selecione Categoria</option>
                                     @foreach($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name_categ }}/{{ $category->name_sub_categ }}</option>
+                                        <option  
+                                            @if(isset($dataForm['filt_cat']) && $dataForm['filt_cat'] == $category->id) selected @endif
+                                            value="{{ $category->id }}">{{ $category->name_categ }}/{{ $category->name_sub_categ }}
+                                        </option>
                                     @endforeach 
                                 </select> &nbsp;&nbsp;
                                 <button type="submit" class="btn btn-md btn-primary">Pesquisar</button>
@@ -33,21 +36,25 @@
                                 <div class="form-group row" style="margin-top: 10px;">
 
                                 <select name="filt_order" class="form-control">
-                                            <option value="last">Últimas adicionadas</option>
-                                            <option value="first" >Primeiras adicionadas</option>
-                                            <option value="desc" >Descrição</option>
-                                            <option value="cat" >Categoria</option>
-                                            <option value="val_max" >Maior valor</option>
-                                            <option value="val_min" >Menor valor</option>
-                                            <option value="dat" >Data da despesa</option>
+                                        @foreach($filterOptions->filtOrder as $k => $v)
+                                            <option 
+                                                @if(isset($dataForm['filt_order']) && $dataForm['filt_order'] == $k) selected @endif
+                                                value="{{$k}}" >{{$v}}
+                                            </option>
+                                        @endforeach 
                                 </select> &nbsp;&nbsp;
                                 <label>Itens por página</label> &nbsp;
                                 <select name="filt_itens_pag" class="form-control">
-                                            <option>20</option>
-                                            <option>10</option>
-                                            <option>30</option>
-                                            <option>50</option>
-                                 </select>
+                                        @foreach($filterOptions->filtItensPag as $v)
+                                            <option 
+                                                @if(isset($dataForm['filt_itens_pag']) && $dataForm['filt_itens_pag'] == $v) selected @endif
+                                                value="{{$v}}" >{{$v}}
+                                            </option>
+                                        @endforeach    
+                                 </select> &nbsp; &nbsp;
+
+                                 <label>Total de despesas encontradas: </label> &nbsp; <strong> {{$expenses->total()}} </strong>
+                                
                              </div>
                             </form>
                         </div>
@@ -66,7 +73,7 @@
                         </div>
                      @endif
 
-                     @if(isset($expenses))
+                     @if(count($expenses) > 0)
                                 <div class="row">
                                     <div class="col-md-3"><strong>Descrição</strong> </div>
                                     <div class="col-md-2"><strong>Valor</strong> </div>
@@ -95,7 +102,7 @@
                                 
                             </div> 
                      @else
-                           <p>Você não possui despesas cadastradas</p>
+                           <p>Não foram encontradas despesas</p>
                      @endif    
 					
                 </div>

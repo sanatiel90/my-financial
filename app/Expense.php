@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Expense extends Model
 {
     protected $fillable = ['value', 'description', 'data', 'category_id', 'user_id' ];
-
 
     public function category()
     {
@@ -19,6 +19,5 @@ class Expense extends Model
     {
     	return $this->belongsTo('App\User');
     }
-
-    
+  
 }
