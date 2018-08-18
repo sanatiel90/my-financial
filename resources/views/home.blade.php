@@ -52,22 +52,22 @@
                     </div> <!-- fim card -->
 
                
-                    <div class="row">                       
+                    <div class="row">                     
                         <div class="col-md">
                     
                             <div class="card">
                                 <div class="card-body">
                                     @if(count($expenses) > 0)
                                         <p>Total de gastos nos últimos 4 meses</p>                                
-                                        @foreach($expenses as $expense) 
-                                            <div class="row" style="background-color: #90CAF9; margin-top: 3px;">
-                                                <div class="col-md-6">Agosto 2018</div>
-                                                <div class="col-md-6">320,00</div>                           
-                                            </div>                               
+                                        @foreach($lastExpensesSum as $k => $v) 
+                                                <div class="row" style="background-color: #90CAF9; margin-top: 3px;">
+                                                <div class="col-md-6">{{$v->month}}</div>
+                                                <div class="col-md-6">{{number_format($v->sumExp, 2, ',', '.')}}</div>                  
+                                                </div>       
                                         @endforeach
                                             <div class="row" style="background-color: #40C4FF; margin-top: 3px;">
                                                 <div class="col-md-6">Média</div>
-                                                <div class="col-md-6">330,00</div>   
+                                                <div class="col-md-6">{{$lastExpensesAvg}}</div>   
                                             </div>
                                             <div class="row justify-content-start" style="margin-top: 15px;"><a href="" class="btn btn-sm btn-success">Ver todos os meses</a></div>
                                     @else

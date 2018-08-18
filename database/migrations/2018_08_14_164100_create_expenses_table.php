@@ -18,6 +18,7 @@ class CreateExpensesTable extends Migration
             $table->double('value');
             $table->text('description');
             $table->date('data');
+            $table->string('month')->nullable();
             $table->unsignedInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedInteger('user_id');

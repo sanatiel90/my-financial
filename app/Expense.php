@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 
 class Expense extends Model
 {
-    protected $fillable = ['value', 'description', 'data', 'category_id', 'user_id' ];
+    protected $fillable = ['value', 'description', 'data', 'category_id', 'user_id', 'month' ];
 
     public function category()
     {
