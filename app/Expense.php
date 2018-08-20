@@ -67,6 +67,17 @@ class Expense extends Model
         return $lastExpensesAvg;
     }
   
+
+    public static function expensesByCateg()
+    {
+    	return DB::table('expenses')
+    				->join('categories', 'expenses.category_id', '=', 'categories.id')
+    				->select(DB::raw('categories.name_categ, categories.name_sub_categ, sum(expenses.value) sumCateg'))
+    				->where('expenses.user_id', '=', Auth::user()->id)
+    				->groupBy('expenses.category_id')
+    				->get();				
+    }
+
 }
 
 

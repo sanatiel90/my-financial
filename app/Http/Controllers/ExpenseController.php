@@ -26,7 +26,17 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
-        Expense::create($request->all());
+        //Expense::create($request->all());
+        $expense = new Expense();
+        $expense->value = $request->value;
+        $expense->description = $request->description;
+        $expense->category_id = $request->category_id;
+        $expense->user_id = $request->user_id;
+        //casa data nao tiver sido informada, preencher com data atual
+        $request->data != null ? $expense->data = $request->data : $expense->data = date('Y-m-d');
+        $expense->month = $this->extractMonthDateStr($expense->data); 
+        $expense->save();
+
     	return redirect()->action('ExpenseController@index')->with('status', 'Despesa cadastrada com sucesso!');
     }
 
@@ -141,6 +151,75 @@ class ExpenseController extends Controller
                 break;
         }
     }
+
+
+    private function extractMonthDateStr($date){    
+        $year = substr($date, 0, 4);
+        $month = substr($date, 5, 2);
+        switch ($month) {
+            case '01':
+                $month = 'Janeiro';
+                break;
+            case '02':
+                $month = 'Fevereiro';
+                break;
+            case '03':
+                $month = 'Março';
+                break;
+            case '04':
+                $month = 'Abril';
+                break;
+            case '05':
+                $month = 'Maio';
+                break;
+            case '06':
+                $month = 'Junho';
+                break;
+            case '07':
+                $month = 'Julho';
+                break;
+            case '08':
+                $month = 'Agosto';
+                break;
+            case '09':
+                $month = 'Setembro';
+                break;
+            case '10':
+                $month = 'Outubro';
+                break;
+            case '11':
+                $month = 'Novembro';
+                break;
+            case '12':
+                $month = 'Dezembro';
+                break;
+            default:
+                $month = 'Indefinido';
+                break;
+        }
+
+        return "$month $year";
+    }
+
+    //monta o json para alimentar o gráfico de despesas por categoria
+    public function getJsonChart(){
+
+        $json = '{
+                    "cols": [
+                        {"id":"","label":"Category","pattern":"","type":"string"},
+                        {"id":"","label":"Total","pattern":"","type":"number"}
+                    ],
+                    "rows": [ ';
+        $expenses = Expense::expensesByCateg();
+        foreach($expenses as $k => $v){
+            $json .= '{"c":[{"v":"'.$v->name_categ.'/'.$v->name_sub_categ.'","f":null},{"v":'.$v->sumCateg.',"f":null}]},';
+        }
+        $json .= ' ] }';
+                  
+        return $json;
+    }
+
+
 
 
 }

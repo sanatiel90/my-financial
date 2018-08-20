@@ -98,6 +98,7 @@
                     </div> <!-- fim row -->
 
                 </div> <!-- fim card-body main -->
+
             </div>
         </div>
     </div>
@@ -126,6 +127,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 
@@ -133,37 +135,37 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+      
+ // Load the Visualization API and the piechart package.
+    google.charts.load('current', {'packages':['corechart']});
+      
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+      
+    function drawChart() {
+      var jsonData = $.ajax({
+          url: "/expenses/jsonChart",
+          dataType: "json",
+          async: false
+          }).responseText;
+          
+      // Create our data table out of JSON data loaded from server.
+      var data = new google.visualization.DataTable(jsonData);
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+      var options = {'title':'Gastos por Categoria',
+                       'width':400,
+                       'height':300};
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
 
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mushrooms', 3],
+<!-- [
+          ['Alimentação', 3],
           ['Onions', 1],
           ['Olives', 1],
           ['Zucchini', 1],
           ['Pepperoni', 2]
-        ]);
-
-        // Set chart options
-        var options = {'title':'Gastos por Categoria',
-                       'width':400,
-                       'height':300};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-
+        ]-->

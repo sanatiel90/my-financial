@@ -28,6 +28,6 @@ Route::prefix('expense')->group(function(){
 	Route::post('/delete', 'ExpenseController@destroy')->name('delete_expense');
 	
 });
-//não sei o que houve, mas não está aceitando a rota '/expense/search'
+//não sei o que houve, mas não está aceitando a rota '/expense/'
 Route::get('/expenses/search', 'ExpenseController@search')->name('search_expense');
-
+Route::get('/expenses/jsonChart', 'ExpenseController@getJsonChart');

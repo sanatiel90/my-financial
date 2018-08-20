@@ -58,7 +58,7 @@
                             <label for="dat" class="col-md-4 col-form-label text-md-right">{{ __('Data') }}</label>
 
                             <div class="col-md-6">
-                                <input id="dat" type="date" class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}" name="data" value="{{  old('data') }}" required >
+                                <input id="dat" type="date" class="form-control{{ $errors->has('data') ? ' is-invalid' : '' }}" name="data" value="{{  old('data') }}"  >
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
                                 @if ($errors->has('data'))
