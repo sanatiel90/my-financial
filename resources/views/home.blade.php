@@ -58,8 +58,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     @if(count($expenses) > 0)
-                                        <p>Total de gastos {{$lastExpenses['limit']}}  </p>                       
-                                        @foreach($lastExpenses['sum'] as $k => $v) 
+                                        <p>Total de gastos {{$lastExpensesMonthly['limit']}}  </p>                       
+                                        @foreach($lastExpensesMonthly['sum'] as $k => $v) 
                                                 <div class="row" style="background-color: #90CAF9; margin-top: 3px;">
                                                 <div class="col-md-6">{{$v->month}}</div>
                                                 <div class="col-md-6">{{number_format($v->sumExp, 2, ',', '.')}}</div>                  
@@ -67,9 +67,9 @@
                                         @endforeach
                                             <div class="row" style="background-color: #40C4FF; margin-top: 3px;">
                                                 <div class="col-md-6">Média</div>
-                                                <div class="col-md-6">{{$lastExpenses['avg']}}</div>   
+                                                <div class="col-md-6">{{$lastExpensesMonthly['avg']}}</div>   
                                             </div>
-                                            <div class="row justify-content-start" style="margin-top: 15px;"><a href="" class="btn btn-sm btn-success">Ver todos os meses</a></div>
+                                            <div class="row justify-content-start" style="margin-top: 15px;"><a href="{{ route('monthly_expenses') }}" class="btn btn-sm btn-success">Ver todos os meses</a></div>
                                     @else
                                         <p>Você não possui despesas cadastradas em nenhum mês</p>
                                     @endif    

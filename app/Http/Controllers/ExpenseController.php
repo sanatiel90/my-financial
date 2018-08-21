@@ -91,6 +91,39 @@ class ExpenseController extends Controller
     }
 
 
+    //monta o json para alimentar o gráfico de despesas por categoria
+    public function getJsonChart(){
+
+        $jsonChart = '{
+                    "cols": [
+                        {"id":"","label":"Category","pattern":"","type":"string"},
+                        {"id":"","label":"Total","pattern":"","type":"number"}
+                    ],
+                    "rows": [ ';
+        $expenses = Expense::expensesByCateg();
+        foreach($expenses as $k => $v){
+            $jsonChart .= '{"c":[{"v":"'.$v->name_categ.'/'.$v->name_sub_categ.'","f":null},{"v":'.$v->sumCateg.',"f":null}]},';
+        }
+        $jsonChart .= ' ] }';
+                  
+        return $jsonChart;
+    }
+
+
+    public function expensesMonthlyDetail(Request $request)
+    {
+        $expensesMonth['all'] = Expense::where('user_id', Auth::user()->id)->where('month', $request->month)->get();
+        $expensesMonth['categ'] = Expense::expensesByCateg($request->month);
+        return response()->json($expensesMonth);
+    }
+
+
+    public function expensesMonthly()
+    {
+        $lastExpensesMonthly = Expense::lastExpensesMonthly();
+        return view('expense.monthly', ['lastExpensesMonthly' => $lastExpensesMonthly]);
+    }
+
 
     private function findOrder($order)
     {
@@ -201,23 +234,6 @@ class ExpenseController extends Controller
         return "$month $year";
     }
 
-    //monta o json para alimentar o gráfico de despesas por categoria
-    public function getJsonChart(){
-
-        $json = '{
-                    "cols": [
-                        {"id":"","label":"Category","pattern":"","type":"string"},
-                        {"id":"","label":"Total","pattern":"","type":"number"}
-                    ],
-                    "rows": [ ';
-        $expenses = Expense::expensesByCateg();
-        foreach($expenses as $k => $v){
-            $json .= '{"c":[{"v":"'.$v->name_categ.'/'.$v->name_sub_categ.'","f":null},{"v":'.$v->sumCateg.',"f":null}]},';
-        }
-        $json .= ' ] }';
-                  
-        return $json;
-    }
 
 
 

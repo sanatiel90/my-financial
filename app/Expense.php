@@ -23,7 +23,7 @@ class Expense extends Model
     }
 
     //retorna o total de despesas por mês, a média e o total de meses pesquisados
-    public static function lastExpenses(int $limit)
+    public static function lastExpensesMonthly(int $limit = 0)
     {  	
         $lastExpenses['sum'] = self::lastExpensesSum($limit);
         $lastExpenses['avg'] = self::lastExpensesAvg($lastExpenses['sum'], $limit);
@@ -34,14 +34,28 @@ class Expense extends Model
     /* retorna o total de despesas dos ultimos '$limit' meses; valor passado por referencia, caso o usuário possua despesas cadastradas em menos do que o $limit informado, considerar o nº de meses do usuário*/
     private static function lastExpensesSum(&$limit) 
     {
-    	$result = DB::table('expenses')
+    	//se $limit nao for 0, quer dizer q foi informado um limite e este será aplicado, caso contrário nenhum limite foi informado e 
+    	//serão pegues todas as ocorrencias
+    	if($limit !== 0){
+    		$result = DB::table('expenses')
                      ->select(DB::raw('sum(value) as sumExp, month'))
                      ->where('user_id', '=', Auth::user()->id)
                      ->orderBy('data', 'desc')
                      ->groupBy('month', 'data')
-                     ->limit($limit)
+                     ->limit($limit)                      
                      ->get(); 
+    	} else {
+    		$result = DB::table('expenses')
+                     ->select(DB::raw('sum(value) as sumExp, month'))
+                     ->where('user_id', '=', Auth::user()->id)
+                     ->orderBy('data', 'desc')
+                     ->groupBy('month', 'data')               
+                     ->get();
 
+            $limit = $result->count();       
+    	}	
+
+    	
       if($result->count() < $limit){
       	$limit = $result->count();
       }                
@@ -68,31 +82,26 @@ class Expense extends Model
     }
   
 
-    public static function expensesByCateg()
+    public static function expensesByCateg($month = null)
     {
-    	return DB::table('expenses')
+     	if($month == null){
+     		$expenses =  DB::table('expenses')
     				->join('categories', 'expenses.category_id', '=', 'categories.id')
     				->select(DB::raw('categories.name_categ, categories.name_sub_categ, sum(expenses.value) sumCateg'))
     				->where('expenses.user_id', '=', Auth::user()->id)
     				->groupBy('expenses.category_id')
-    				->get();				
+    				->get();
+    	} else {
+    		$expenses =  DB::table('expenses')
+    				->join('categories', 'expenses.category_id', '=', 'categories.id')
+    				->select(DB::raw('categories.name_categ, categories.name_sub_categ, sum(expenses.value) sumCateg'))
+    				->where('expenses.user_id', '=', Auth::user()->id)
+    				->where('expenses.month', '=', $month)
+    				->groupBy('expenses.category_id')
+    				->get();
+    	}
+
+    	return $expenses;
     }
 
 }
-
-
-/*$lastExpenses['sum'] = DB::table('expenses')
-                     ->select(DB::raw('sum(value) as sumExp, month'))
-                     ->where('user_id', '=', Auth::user()->id)
-                     ->orderBy('data', 'desc')
-                     ->groupBy('month', 'data')
-                     ->limit($limit)
-                     ->get(); 
-
-        $lastExpenses['avg'] = 0;
-        foreach ($lastExpenses['sum'] as $key => $value){
-            $lastExpenses['avg'] = $lastExpenses['avg'] + $value->sumExp;
-        }
-        
-        $lastExpenses['avg'] = $lastExpenses['avg']/$limit; 
-        $lastExpenses['avg'] = number_format($lastExpenses['avg'], 2, ',', '.');*/

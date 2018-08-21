@@ -26,8 +26,8 @@ class HomeController extends Controller
     public function index()
     {        
         $expenses = Expense::where('user_id', Auth::user()->id)->limit(6)->latest()->get(); 
-        $lastExpenses = Expense::lastExpenses(4);
+        $lastExpensesMonthly = Expense::lastExpensesMonthly(4);
 
-        return view('home', ['expenses' => $expenses, 'lastExpenses' => $lastExpenses]);
+        return view('home', ['expenses' => $expenses, 'lastExpensesMonthly' => $lastExpensesMonthly]);
     }
 }
