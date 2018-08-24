@@ -110,19 +110,21 @@ class ExpenseController extends Controller
     }
 
 
-    public function expensesMonthlyDetail(Request $request)
-    {
-        $expensesMonth['all'] = Expense::where('user_id', Auth::user()->id)->where('month', $request->month)->get();
-        $expensesMonth['categ'] = Expense::expensesByCateg($request->month);
-        return response()->json($expensesMonth);
-    }
-
-
     public function expensesMonthly()
     {
         $lastExpensesMonthly = Expense::lastExpensesMonthly();
         return view('expense.monthly', ['lastExpensesMonthly' => $lastExpensesMonthly]);
     }
+
+
+    public function expensesMonthlyDetail(Request $request)
+    {
+        $expensesMonth['all'] = Expense::expensesDetail($request->month, 2); 
+        $expensesMonth['categ'] = Expense::expensesDetail($request->month, 1);
+        return response()->json($expensesMonth);
+    }
+
+    
 
 
     private function findOrder($order)

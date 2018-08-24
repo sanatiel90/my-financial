@@ -82,26 +82,42 @@ class Expense extends Model
     }
   
 
-    public static function expensesByCateg($month = null)
+    public static function expensesByCateg()
     {
-     	if($month == null){
      		$expenses =  DB::table('expenses')
     				->join('categories', 'expenses.category_id', '=', 'categories.id')
     				->select(DB::raw('categories.name_categ, categories.name_sub_categ, sum(expenses.value) sumCateg'))
     				->where('expenses.user_id', '=', Auth::user()->id)
     				->groupBy('expenses.category_id')
     				->get();
-    	} else {
-    		$expenses =  DB::table('expenses')
-    				->join('categories', 'expenses.category_id', '=', 'categories.id')
-    				->select(DB::raw('categories.name_categ, categories.name_sub_categ, sum(expenses.value) sumCateg'))
-    				->where('expenses.user_id', '=', Auth::user()->id)
-    				->where('expenses.month', '=', $month)
-    				->groupBy('expenses.category_id')
-    				->get();
-    	}
 
     	return $expenses;
     }
+
+
+
+    public static function expensesDetail($month, $tipo)
+    {
+       if($tipo == 1){ //despesas de um mÊs especifico agrupado por categoria
+          $expenses =  DB::table('expenses')
+            ->join('categories', 'expenses.category_id', '=', 'categories.id')
+            ->select(DB::raw('categories.name_categ, categories.name_sub_categ, sum(expenses.value) sumCateg'))
+            ->where('expenses.user_id', '=', Auth::user()->id)
+            ->where('expenses.month', '=', $month)
+            ->groupBy('expenses.category_id')
+            ->get();
+       } else if ($tipo == 2) { //todas as despesas de um mÊs
+          $expenses =  DB::table('expenses')
+            ->join('categories', 'expenses.category_id', '=', 'categories.id')
+            ->select(DB::raw('expenses.description, expenses.value, expenses.category_id, expenses.data, categories.name_categ, categories.name_sub_categ'))
+            ->where('expenses.user_id', '=', Auth::user()->id)
+            ->where('expenses.month', '=', $month)
+            ->get();
+       }
+
+       return $expenses;
+    }
+
+
 
 }
