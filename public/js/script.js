@@ -4,6 +4,11 @@ $(document).ready(function(){
 		$('#inp-del-exp').val(id); 
 	});
 
+	$('.bt-del-cat').on('click', function(){
+		let id = $(this).val();
+		$('#inp-del-cat').val(id); 
+	});
+	
 
 	$('.bt-detail-month').on('click', function(){
 		let month = $(this).val();

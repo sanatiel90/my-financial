@@ -57,7 +57,6 @@ class ExpenseController extends Controller
     public function destroy(Request $request)
     {
     	$expense = Expense::findOrFail($request->id);
-    	echo $expense->description;
     	$expense->delete();
 		return redirect()->back()->with('status', 'Despesa excluída com sucesso!');    	
     }

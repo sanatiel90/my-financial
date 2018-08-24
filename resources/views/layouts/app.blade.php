@@ -60,7 +60,40 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        @guest
 
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('new_expense') }}">Nova Despesa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('expenses') }}">Listar Despesas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('monthly_expenses') }}">Despesas Mês</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Gráficos</a>
+                            </li>
+
+                             @if(Auth::user()->email == 'a@a.com')
+                             <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Categorias <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('new_category') }}">
+                                        {{ __('Nova Categoria') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('categories') }}">
+                                        {{ __('Listar Categorias') }}
+                                    </a>
+                                </div>
+                            </li>
+                            @endif
+
+                        @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
