@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ExpenseRequest;
 use App\Expense;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
@@ -24,9 +25,8 @@ class ExpenseController extends Controller
     	return view('expense.create', ['categories' => $categories]);
     }
 
-    public function store(Request $request)
+    public function store(ExpenseRequest $request)
     {
-        //Expense::create($request->all());
         $expense = new Expense();
         $expense->value = $request->value;
         $expense->description = $request->description;
@@ -46,7 +46,7 @@ class ExpenseController extends Controller
     	return view('expense.edit', ['expense' => $expense, 'categories' => $categories]);
     }
 
-    public function update(Request $request)
+    public function update(ExpenseRequest $request)
     {
     	$expense = Expense::findOrFail($request->expense_id);
     	$expense->update($request->all());

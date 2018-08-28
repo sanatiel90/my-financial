@@ -1,4 +1,4 @@
-@extends('layouts.app')
+ @extends('layouts.app')
 
 @section('content')
 
@@ -30,7 +30,7 @@
                             <label for="val" class="col-md-4 col-form-label text-md-right">{{ __('Valor') }}</label>
 
                             <div class="col-md-6">
-                                <input id="val" type="text" pattern="[0-9.]+" class="form-control{{ $errors->has('value') ? ' is-invalid' : '' }}" name="value" value="{{ $expense->value }}" required >
+                                <input id="val" type="text" pattern="[0-9.]+" title="Apenas valores numéricos. Use ponto para separar casas decimais" class="form-control{{ $errors->has('value') ? ' is-invalid' : '' }}" name="value" value="{{ $expense->value }}" required >
 
                                 @if ($errors->has('value'))
                                     <span class="invalid-feedback" role="alert">

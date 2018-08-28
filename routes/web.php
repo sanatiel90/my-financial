@@ -23,7 +23,7 @@ Route::prefix('expense')->group(function(){
 	Route::get('/', 'ExpenseController@index')->name('expenses');
 	Route::get('/create', 'ExpenseController@create')->name('new_expense');	
 	Route::post('/', 'ExpenseController@store')->name('store_expense');
-	Route::get('/{expense}', 'ExpenseController@show')->name('show_expense.expense'); //prob
+	Route::get('/{expense}', 'ExpenseController@show')->name('show_expense.expense'); //prob está aq
 	Route::post('/update', 'ExpenseController@update')->name('update_expense');	
 	Route::post('/delete', 'ExpenseController@destroy')->name('delete_expense');
 });
