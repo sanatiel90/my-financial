@@ -16,7 +16,7 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->email !== 'a@a.com'){
+        if (Auth::user()->email !== 'edocara@caraed.com'){
             return redirect('home');
         } 
         return $next($request);

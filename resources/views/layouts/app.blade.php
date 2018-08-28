@@ -76,7 +76,7 @@
                                 <a class="nav-link" href="#">Gráficos</a>
                             </li>
 
-                             @if(Auth::user()->email == 'a@a.com')
+                             @if(Auth::user()->email == 'edocara@caraed.com')
                              <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     Categorias <span class="caret"></span>
