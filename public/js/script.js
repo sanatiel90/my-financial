@@ -20,11 +20,11 @@ $(document).ready(function(){
           	async: false
 		});
 
-
+		console.log('OIOIOI');
 
 		var expenses = "";
 		var categories = "";
-		dataJson.done(function(element){
+		dataJson.always(function(element){
 		console.log(dataJson);	
 			for(var all in element['all']){
 				expenses += '<div class="row" style="background-color: #90CAF9; margin-top: 3px;" >';
