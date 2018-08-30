@@ -40,16 +40,16 @@ class Expense extends Model
     		$result = DB::table('expenses')
                      ->select(DB::raw('sum(value) as sumExp, month'))
                      ->where('user_id', '=', Auth::user()->id)
-                     ->orderBy('data', 'desc')
-                     ->groupBy('month', 'data')
+                     //->orderBy('data', 'desc')
+                     ->groupBy('month') //, 'data'
                      ->limit($limit)                      
                      ->get(); 
     	} else {
     		$result = DB::table('expenses')
                      ->select(DB::raw('sum(value) as sumExp, month'))
                      ->where('user_id', '=', Auth::user()->id)
-                     ->orderBy('data', 'desc')
-                     ->groupBy('month', 'data')               
+                    // ->orderBy('data', 'desc')
+                     ->groupBy('month') //, 'data'               
                      ->get();
 
             $limit = $result->count();       
