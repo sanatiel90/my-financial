@@ -118,9 +118,10 @@ class ExpenseController extends Controller
 
     public function expensesMonthlyDetail(Request $request)
     {
-        $expensesMonth['all'] = Expense::expensesDetail($request->month, 2); 
-        $expensesMonth['categ'] = Expense::expensesDetail($request->month, 1);
-        return response()->json($expensesMonth);
+        echo "algo";
+        //$expensesMonth['all'] = Expense::expensesDetail($request->month, 2); 
+        //$expensesMonth['categ'] = Expense::expensesDetail($request->month, 1);
+        //return response()->json($expensesMonth);
     }
 
     
