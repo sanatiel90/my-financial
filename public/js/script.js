@@ -20,7 +20,7 @@ $(document).ready(function(){
           	async: false
 		});
 
-		console.log('OIOIOI');
+		
 
 		var expenses = "";
 		var categories = "";
