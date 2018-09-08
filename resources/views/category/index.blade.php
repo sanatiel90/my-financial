@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-sm-10">
             <div class="card">
                 <div class="card-header">
                     <p>
@@ -28,17 +28,17 @@
 
                      @if(count($categories) > 0)
                                 <div class="row">
-                                    <div class="col-md-3"><strong>Nome</strong> </div>
-                                    <div class="col-md-2"><strong>Sub-nome</strong> </div>
-                                    <div class="col-md-3"><strong>Descrição</strong> </div>
-                                    <div class="col-md-2"><strong>Ações</strong> </div>                           
+                                    <div class="col-sm-3"><strong>Nome</strong> </div>
+                                    <div class="col-sm-2"><strong>Sub-nome</strong> </div>
+                                    <div class="col-sm-3"><strong>Descrição</strong> </div>
+                                    <div class="col-sm-2"><strong>Ações</strong> </div>                           
                                 </div>
                             @foreach($categories as $category) 
                                 <div class="row" style="background-color: #90CAF9; margin-top: 3px;">
-                                    <div class="col-md-3">{{ $category->name_categ }}</div>
-                                    <div class="col-md-2">{{ $category->name_sub_categ  }}</div>
-                                    <div class="col-md-3">{{ $category->description }}</div>
-                                    <div class="col-md-2"> 
+                                    <div class="col-sm-3">{{ $category->name_categ }}</div>
+                                    <div class="col-sm-2">{{ $category->name_sub_categ  }}</div>
+                                    <div class="col-sm-3">{{ $category->description }}</div>
+                                    <div class="col-sm-2"> 
                                         <button  value="{{ $category->id }}" class="btn btn-sm btn-danger bt-del-cat" data-toggle="modal" data-target="#exampleModal"><i class="far fa-trash-alt"></i></button>
                                     </div>                           
                                 </div>

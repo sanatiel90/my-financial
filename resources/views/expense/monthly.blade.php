@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-sm-8">
             <div class="card">
                 <div class="card-header">
                     <p>
@@ -25,21 +25,21 @@
 
                      @if(count($lastExpensesMonthly) > 0)
                                 <div class="row">
-                                    <div class="col-md"><strong>Mês</strong> </div>
-                                    <div class="col-md"><strong>Total</strong> </div>
-                                    <div class="col-md"><strong></strong> </div>
+                                    <div class="col-sm"><strong>Mês</strong> </div>
+                                    <div class="col-sm"><strong>Total</strong> </div>
+                                    <div class="col-sm"><strong></strong> </div>
                                 </div>
                             @foreach($lastExpensesMonthly['sum'] as $k =>$v)  
                                 <div class="row" style="background-color: #90CAF9; margin-top: 3px;">
-                                    <div class="col-md">{{ $v->month }}</div>
-                                    <div class="col-md">{{ number_format($v->sumExp, 2, ',', '.')  }}</div>
-                                    <div class="col-md"><strong><button value="{{ $v->month }}" data-toggle="modal" data-target="#exampleModalLong" class="btn btn-sm btn-success bt-detail-month">Detalhar</button></strong> </div>                           
+                                    <div class="col-sm">{{ $v->month }}</div>
+                                    <div class="col-sm">{{ number_format($v->sumExp, 2, ',', '.')  }}</div>
+                                    <div class="col-sm"><strong><button value="{{ $v->month }}" data-toggle="modal" data-target="#exampleModalLong" class="btn btn-sm btn-success bt-detail-month">Detalhar</button></strong> </div>                           
                                 </div>
                             @endforeach
                             	<div class="row" style="background-color: #40C4FF; margin-top: 3px;">
-                                    <div class="col-md">Média de gasto</div>
-                                	<div class="col-md">{{$lastExpensesMonthly['avg']}}</div>
-                                	<div class="col-md"><strong></strong> </div>   
+                                    <div class="col-sm">Média de gasto</div>
+                                	<div class="col-sm">{{$lastExpensesMonthly['avg']}}</div>
+                                	<div class="col-sm"><strong></strong> </div>   
                                 </div>
                      @else
                            <p>Não foram encontradas despesas</p>

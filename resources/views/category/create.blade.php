@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-sm-8">
             <div class="card">
                 <div class="card-header"><strong>Nova Categoria</strong></div>
 
@@ -13,9 +13,9 @@
 						@csrf
 
 						 <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+                            <label for="name" class="col-sm-4 col-form-label text-sm-right">{{ __('Nome') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <input id="name" type="text" class="form-control{{ $errors->has('name_categ') ? ' is-invalid' : '' }}" name="name_categ" value="{{ old('name_categ') }}" required autofocus>
 
                                 @if ($errors->has('name_categ'))
@@ -28,9 +28,9 @@
 
 
                         <div class="form-group row">
-                            <label for="sub" class="col-md-4 col-form-label text-md-right">{{ __('Sub-Categoria') }}</label>
+                            <label for="sub" class="col-sm-4 col-form-label text-sm-right">{{ __('Sub-Categoria') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <input id="sub" type="text" class="form-control{{ $errors->has('name_sub_categ') ? ' is-invalid' : '' }}" name="name_sub_categ" value="{{ old('name_sub_categ') }}" required >
 
                                 @if ($errors->has('name_sub_categ'))
@@ -42,9 +42,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="desc" class="col-md-4 col-form-label text-md-right">{{ __('Descrição') }}</label>
+                            <label for="desc" class="col-sm-4 col-form-label text-sm-right">{{ __('Descrição') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <input id="desc" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" value="{{ old('description') }}" required >
 
                                 @if ($errors->has('description'))
@@ -58,7 +58,7 @@
 
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-sm-6 offset-sm-4">
                                 <button type="submit" class="btn btn-success">
                                     Cadastrar
                                 </button>

@@ -86,7 +86,7 @@
                 text-transform: uppercase;
             }
 
-            .m-b-md {
+            .m-b-sm {
                 margin-bottom: 30px;
             }
 
@@ -100,14 +100,14 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            <div class="col-md text-center">
+            <div class="col-sm text-center">
                 
-                <h1 class="col-md title" >MyFinancial</h1>
-                <h3 class="col-md subtitle">Gerencie seus gastos de forma simples!</h3>
+                <h1 class="col-sm title" >MyFinancial</h1>
+                <h3 class="col-sm subtitle">Gerencie seus gastos de forma simples!</h3>
 
                 <div class="row">             
-                    <div class="col-md"></div>
-                    <div class="col-md">    
+                    <div class="col-sm"></div>
+                    <div class="col-sm">    
                          @if (Route::has('login')) 
                             @auth
                                  <a href="{{ url('/home') }}" class="btn btn-block btn-primary">Ir para a Dashboard</a> 
@@ -119,7 +119,7 @@
                             @endauth
                          @endif 
                     </div>
-                    <div class="col-md"></div>
+                    <div class="col-sm"></div>
                 </div>
                 
             </div>

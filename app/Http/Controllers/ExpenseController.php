@@ -13,7 +13,7 @@ class ExpenseController extends Controller
 {
 	public function index()
     {
-    	$categories = Category::all();
+    	$categories = Category::orderBy('name_categ')->orderBy('name_sub_categ')->get();
         $filterOptions = new ExpenseFilter(); 
     	$expenses = Expense::where('user_id', Auth::user()->id)->latest()->paginate(20);
     	return view('expense.index', ['expenses' => $expenses, 'categories' => $categories, 'filterOptions' => $filterOptions]);
@@ -21,7 +21,7 @@ class ExpenseController extends Controller
 
     public function create()
     {
-    	$categories = Category::all();
+    	$categories = Category::orderBy('name_categ')->orderBy('name_sub_categ')->get(); //Category::all();
     	return view('expense.create', ['categories' => $categories]);
     }
 
@@ -42,7 +42,7 @@ class ExpenseController extends Controller
 
     public function show(Expense $expense)
     {
-    	$categories = Category::all();
+    	$categories = Category::orderBy('name_categ')->orderBy('name_sub_categ')->get(); //Category::all();
     	return view('expense.edit', ['expense' => $expense, 'categories' => $categories]);
     }
 
@@ -65,7 +65,7 @@ class ExpenseController extends Controller
     public function search(Request $request)
     {
     	$dataForm = $request->except('_token');
-        $categories = Category::all();
+        $categories = Category::orderBy('name_categ')->orderBy('name_sub_categ')->get(); //Category::all();
     	$filterOptions = new ExpenseFilter(); 
         //criando a qry com os filtros
         $expenses = Expense::where(function($qry) use($request){

@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-sm-10">
             <div class="card">
                 <div class="card-header">
                     <p>
@@ -15,13 +15,14 @@
                     
 
                     <div class="row" id="div-exp-filter-1" >
-                        <div class="col-md">
+                        <div class="col-sm">
                             <label>Filtros de pesquisa</label>
                             <form action="{{ route('search_expense') }}" method="GET" class="form form-inline">    
                                 @csrf
                                 <div class="form-group row">                               
                                 <input type="text" name="filt_desc" value="@if(isset($dataForm['filt_desc'])){{$dataForm['filt_desc']}}@endif" placeholder="Descrição" class="form-control"> &nbsp;&nbsp;
-                                <input type="date" name="filt_dat" value="@if(isset($dataForm['filt_dat'])){{$dataForm['filt_dat']}}@endif" class="form-control" > &nbsp;&nbsp;
+                                <label>Data</label> &nbsp;
+                                <input type="date"  name="filt_dat" value="@if(isset($dataForm['filt_dat'])){{$dataForm['filt_dat']}}@endif" class="form-control" > &nbsp;&nbsp;
                                 <select name="filt_cat" class="form-control">
                                     <option value="0">--Selecione Categoria</option>
                                     @foreach($categories as $category)
@@ -31,7 +32,7 @@
                                         </option>
                                     @endforeach 
                                 </select> &nbsp;&nbsp;
-                                <button type="submit" class="btn btn-md btn-primary">Pesquisar</button>
+                                <button type="submit" class="btn btn-sm btn-primary">Pesquisar</button>
                                 </div>
                                 <div class="form-group row" style="margin-top: 10px;">
 
@@ -54,6 +55,8 @@
                                  </select> &nbsp; &nbsp;
 
                                  <label>Total de despesas encontradas: </label> &nbsp; <strong> {{$expenses->total()}} </strong>
+                                 &nbsp; &nbsp;
+                                 <label>Valor: </label> &nbsp; <strong> {{$expenses->sum('value')}} </strong>
                                 
                              </div>
                             </form>
@@ -75,19 +78,19 @@
 
                      @if(count($expenses) > 0)
                                 <div class="row">
-                                    <div class="col-md-3"><strong>Descrição</strong> </div>
-                                    <div class="col-md-2"><strong>Valor</strong> </div>
-                                    <div class="col-md-3"><strong>Categoria</strong> </div>
-                                    <div class="col-md-2"><strong>Data</strong> </div>
-                                    <div class="col-md-2"><strong>Ações</strong> </div>                           
+                                    <div class="col-sm-3"><strong>Descrição</strong> </div>
+                                    <div class="col-sm-2"><strong>Valor</strong> </div>
+                                    <div class="col-sm-3"><strong>Categoria</strong> </div>
+                                    <div class="col-sm-2"><strong>Data</strong> </div>
+                                    <div class="col-sm-2"><strong>Ações</strong> </div>                           
                                 </div>
                             @foreach($expenses as $expense) 
                                 <div class="row" style="background-color: #90CAF9; margin-top: 3px;">
-                                    <div class="col-md-3">{{ $expense->description }}</div>
-                                    <div class="col-md-2">{{ number_format($expense->value, 2, ',', '.')  }}</div>
-                                    <div class="col-md-3">{{ $expense->category->name_categ }}/{{ $expense->category->name_sub_categ }}</div>
-                                    <div class="col-md-2">{{ date('d/m/Y', strtotime($expense->data)) }}</div>
-                                    <div class="col-md-2">
+                                    <div class="col-sm-3">{{ $expense->description }}</div>
+                                    <div class="col-sm-2">{{ number_format($expense->value, 2, ',', '.')  }}</div>
+                                    <div class="col-sm-3">{{ $expense->category->name_categ }}/{{ $expense->category->name_sub_categ }}</div>
+                                    <div class="col-sm-2">{{ date('d/m/Y', strtotime($expense->data)) }}</div>
+                                    <div class="col-sm-2">
                                         <a href="{{ route('show_expense.expense', $expense) }}" class="btn btn-sm btn-primary"><i class="far fa-edit"></i></a> 
                                         <button  value="{{ $expense->id }}" class="btn btn-sm btn-danger bt-del-exp" data-toggle="modal" data-target="#exampleModal"><i class="far fa-trash-alt"></i></button>
                                     </div>                           

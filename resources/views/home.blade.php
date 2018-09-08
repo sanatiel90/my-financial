@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-sm-10">
             <div class="card">
                 <div class="card-header bt" >
                         Bem vindo, <strong> {{ Auth::user()->name }} </strong> 
@@ -26,19 +26,19 @@
                         @if(count($expenses) > 0)
                             <p><strong>Suas últimas despesas</strong></p>
                                 <div class="row">
-                                    <div class="col-md-3"><strong>Descrição</strong> </div>
-                                    <div class="col-md-2"><strong>Valor</strong> </div>
-                                    <div class="col-md-3"><strong>Categoria</strong> </div>
-                                    <div class="col-md-2"><strong>Data</strong> </div>
-                                    <div class="col-md-2"><strong>Ações</strong> </div>                           
+                                    <div class="col-sm-3"><strong>Descrição</strong> </div>
+                                    <div class="col-sm-2"><strong>Valor</strong> </div>
+                                    <div class="col-sm-3"><strong>Categoria</strong> </div>
+                                    <div class="col-sm-2"><strong>Data</strong> </div>
+                                    <div class="col-sm-2"><strong>Ações</strong> </div>                           
                                 </div>
                             @foreach($expenses as $expense) 
                                 <div class="row" style="background-color: #90CAF9; margin-top: 3px;">
-                                    <div class="col-md-3">{{ $expense->description }}</div>
-                                    <div class="col-md-2">{{ number_format($expense->value, 2, ',', '.')  }}</div>
-                                    <div class="col-md-3">{{ $expense->category->name_categ }}/{{ $expense->category->name_sub_categ }}</div>
-                                    <div class="col-md-2">{{ date('d/m/Y', strtotime($expense->data)) }}</div>
-                                    <div class="col-md-2">
+                                    <div class="col-sm-3">{{ $expense->description }}</div>
+                                    <div class="col-sm-2">{{ number_format($expense->value, 2, ',', '.')  }}</div>
+                                    <div class="col-sm-3">{{ $expense->category->name_categ }}/{{ $expense->category->name_sub_categ }}</div>
+                                    <div class="col-sm-2">{{ date('d/m/Y', strtotime($expense->data)) }}</div>
+                                    <div class="col-sm-2">
                                         <a href="{{ route('show_expense.expense', $expense) }}" class="btn btn-sm btn-primary"><i class="far fa-edit"></i></a> 
                                         <button  value="{{ $expense->id }}" class="btn btn-sm btn-danger bt-del-exp" data-toggle="modal" data-target="#exampleModal"><i class="far fa-trash-alt"></i></button>
                                     </div>                           
@@ -53,7 +53,7 @@
 
                
                     <div class="row">                     
-                        <div class="col-md">
+                        <div class="col-sm">
                     
                             <div class="card">
                                 <div class="card-body">
@@ -61,13 +61,13 @@
                                         <p>Total de gastos {{$lastExpensesMonthly['limit']}}  </p>                       
                                         @foreach($lastExpensesMonthly['sum'] as $k => $v) 
                                                 <div class="row" style="background-color: #90CAF9; margin-top: 3px;">
-                                                <div class="col-md-6">{{$v->month}}</div>
-                                                <div class="col-md-6">{{number_format($v->sumExp, 2, ',', '.')}}</div>                  
+                                                <div class="col-sm-6">{{$v->month}}</div>
+                                                <div class="col-sm-6">{{number_format($v->sumExp, 2, ',', '.')}}</div>                  
                                                 </div>       
                                         @endforeach
                                             <div class="row" style="background-color: #40C4FF; margin-top: 3px;">
-                                                <div class="col-md-6">Média</div>
-                                                <div class="col-md-6">{{$lastExpensesMonthly['avg']}}</div>   
+                                                <div class="col-sm-6">Média</div>
+                                                <div class="col-sm-6">{{$lastExpensesMonthly['avg']}}</div>   
                                             </div>
                                             <div class="row justify-content-start" style="margin-top: 15px;"><a href="{{ route('monthly_expenses') }}" class="btn btn-sm btn-success">Ver todos os meses</a></div>
                                     @else
@@ -76,9 +76,9 @@
                                 </div>
                             </div> <!-- fim card -->
 
-                        </div> <!--fim col-md -->
+                        </div> <!--fim col-sm -->
 
-                        <div class="col-md">
+                        <div class="col-sm">
                             <div class="card">
                                 <div class="card-body">
                                     @if(count($expenses) > 0)
@@ -93,7 +93,7 @@
                                 </div>
                             </div> <!-- fim card -->
 
-                        </div> <!--fim col-md -->
+                        </div> <!--fim col-sm -->
                     
                     </div> <!-- fim row -->
 
