@@ -88,7 +88,7 @@ class Expense extends Model
     				->join('categories', 'expenses.category_id', '=', 'categories.id')
     				->select(DB::raw('expenses.category_id, categories.name_categ, categories.name_sub_categ, sum(expenses.value) sumCateg'))
     				->where('expenses.user_id', '=', Auth::user()->id)
-    				->groupBy('expenses.category_id')
+    				->groupBy('expenses.category_id', 'categories.name_categ', 'categories.name_sub_categ')
     				->get();
 
     	return $expenses;
