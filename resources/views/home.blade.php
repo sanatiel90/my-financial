@@ -103,6 +103,8 @@
         </div>
     </div>
 
+<?php var_dump($exp); ?>
+
 </div>
 
 
@@ -134,11 +136,14 @@
 @endsection
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+</script>
     <script type="text/javascript">
       
     console.log('Olá Mundo!');
  // Load the Visualization API and the piechart package.
-    google.charts.load('current', {'packages':['corechart']});
+    //google.charts.load('current', {'packages':['corechart']});
       
     // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(drawChart);

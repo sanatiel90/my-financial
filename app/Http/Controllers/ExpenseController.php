@@ -116,9 +116,8 @@ class ExpenseController extends Controller
             $jsonChart .= '{"c":[{"v":"'.$v->name_categ.'/'.$v->name_sub_categ.'","f":null},{"v":'.$v->sumCateg.',"f":null}]},';
         }
         $jsonChart .= ' ] }';
-        
-        echo $jsonChart;          
-        //return $jsonChart;
+                  
+        return $jsonChart;
     }
 
 
