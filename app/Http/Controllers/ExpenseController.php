@@ -15,8 +15,9 @@ class ExpenseController extends Controller
     {
     	$categories = Category::orderBy('name_categ')->orderBy('name_sub_categ')->get();
         $filterOptions = new ExpenseFilter(); 
-    	$expenses = Expense::where('user_id', Auth::user()->id)->latest()->paginate(20);
-        $sumExp = $expenses->sum('value'); 
+    	$sumExp = Expense::where('user_id', Auth::user()->id)->sum('value'); 
+        $expenses = Expense::where('user_id', Auth::user()->id)->latest()->paginate(20);
+        
     	return view('expense.index', [ 'expenses' => $expenses, 
                                        'categories' => $categories, 
                                        'filterOptions' => $filterOptions, 
@@ -71,8 +72,8 @@ class ExpenseController extends Controller
     	$dataForm = $request->except('_token');
         $categories = Category::orderBy('name_categ')->orderBy('name_sub_categ')->get(); //Category::all();
     	$filterOptions = new ExpenseFilter(); 
-        //criando a qry com os filtros
-        $expenses = Expense::where(function($qry) use($request){
+        
+        /*$expenses = Expense::where(function($qry) use($request){
     		$qry->where('user_id', Auth::user()->id);
             if(isset($request->filt_desc)){
     			$qry->where('description', 'like', '%'.$request->filt_desc.'%');
@@ -85,8 +86,26 @@ class ExpenseController extends Controller
 			}  		
     	})->orderBy($this->findOrder($request->filt_order),$this->findAscDesc($request->filt_order))
           ->paginate($request->filt_itens_pag); 
+*/
+        //criando a qry com os filtros
+        $expensesAux = Expense::where(function($qry) use($request){
+            $qry->where('user_id', Auth::user()->id);
+            if(isset($request->filt_desc)){
+                $qry->where('description', 'like', '%'.$request->filt_desc.'%');
+            }
+            if(isset($request->filt_dat)){
+                $qry->where('data', $request->filt_dat);
+            }
+            if((isset($request->filt_cat)) && ($request->filt_cat != 0)){
+                $qry->where('category_id', $request->filt_cat);
+            }       
+        })->orderBy($this->findOrder($request->filt_order),$this->findAscDesc($request->filt_order));
+        
+        //pegando o total considerando a busca feita
+        $sumExp = $expensesAux->sum('value');
 
-        $sumExp = $expenses->sum('value');
+        //paginando resultados
+        $expenses = $expensesAux->paginate($request->filt_itens_pag);
 
     	return  view('expense.index', ['expenses' => $expenses, 
                                        'categories' => $categories, 
