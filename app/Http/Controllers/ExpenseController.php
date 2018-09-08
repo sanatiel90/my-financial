@@ -16,7 +16,11 @@ class ExpenseController extends Controller
     	$categories = Category::orderBy('name_categ')->orderBy('name_sub_categ')->get();
         $filterOptions = new ExpenseFilter(); 
     	$expenses = Expense::where('user_id', Auth::user()->id)->latest()->paginate(20);
-    	return view('expense.index', ['expenses' => $expenses, 'categories' => $categories, 'filterOptions' => $filterOptions]);
+        $sumExp = $expenses->sum('value'); 
+    	return view('expense.index', [ 'expenses' => $expenses, 
+                                       'categories' => $categories, 
+                                       'filterOptions' => $filterOptions, 
+                                       'sumExp' => $sumExp]);
     }	
 
     public function create()
@@ -82,10 +86,13 @@ class ExpenseController extends Controller
     	})->orderBy($this->findOrder($request->filt_order),$this->findAscDesc($request->filt_order))
           ->paginate($request->filt_itens_pag); 
 
+        $sumExp = $expenses->sum('value');
+
     	return  view('expense.index', ['expenses' => $expenses, 
                                        'categories' => $categories, 
                                        'dataForm' => $dataForm,
-                                       'filterOptions' => $filterOptions
+                                       'filterOptions' => $filterOptions,
+                                       'sumExp' => $sumExp
                                       ]);
     }
 
