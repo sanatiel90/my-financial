@@ -104,7 +104,7 @@ class Expense extends Model
             ->select(DB::raw('categories.name_categ, categories.name_sub_categ, sum(expenses.value) sumCateg'))
             ->where('expenses.user_id', '=', Auth::user()->id)
             ->where('expenses.month', '=', $month)
-            ->groupBy('expenses.category_id')
+            ->groupBy('expenses.category_id', 'categories.name_categ', 'categories.name_sub_categ')
             ->get();
        } else if ($tipo == 2) { //todas as despesas de um mÊs
           $expenses =  DB::table('expenses')
