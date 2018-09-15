@@ -24,8 +24,8 @@ $(document).ready(function(){
 
 		var expenses = "";
 		var categories = "";
-		dataJson.always(function(element){
-		console.log(dataJson);	
+		dataJson.done(function(element){
+
 			for(var all in element['all']){
 				expenses += '<div class="row" style="background-color: #90CAF9; margin-top: 3px;" >';
 				expenses += '<div class="col-md" >'+element['all'][all].description+'</div>';
@@ -57,6 +57,7 @@ $(document).ready(function(){
 		let formattedDate = day+separator+month+separator+year;
 		return formattedDate;
 	}
+
 
 
 });
