@@ -68,6 +68,9 @@
         	</div>
         	<div class="card-body" id="detail-month-categ">
         	</div>
+          <div>
+            <div id="chart-div-detail"></div>
+          </div>
         </div>
         <br>
         <div class="card">
@@ -80,7 +83,12 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <form action="{{route('monthly_print')}}" >
+            @csrf
+            <input type="hidden" name="month-print" id="inp-print-month">
+            <button type="submit" class="btn btn-success" >Imprimir</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </form>
       </div>
     </div>
   </div>
@@ -88,4 +96,4 @@
 
 @endsection
 
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

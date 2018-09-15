@@ -82,16 +82,30 @@ class Expense extends Model
     }
   
 
-    public static function expensesByCateg()
+    public static function expensesByCateg($month = null)
     {
-     		$expenses =  DB::table('expenses')
+     		/*$expenses =  DB::table('expenses')
     				->join('categories', 'expenses.category_id', '=', 'categories.id')
     				->select(DB::raw('expenses.category_id, categories.name_categ, categories.name_sub_categ, sum(expenses.value) sumCateg'))
     				->where('expenses.user_id', '=', Auth::user()->id)
     				->groupBy('expenses.category_id', 'categories.name_categ', 'categories.name_sub_categ')
     				->get();
+  */
+        $expensesAux = DB::table('expenses')
+            ->join('categories', 'expenses.category_id', '=', 'categories.id')
+            ->select(DB::raw('expenses.category_id, categories.name_categ, categories.name_sub_categ, sum(expenses.value) sumCateg'))
+            ->where('expenses.user_id', '=', Auth::user()->id);
+        if(!$month){
+              $expenses = $expensesAux->groupBy('expenses.category_id', 'categories.name_categ', 'categories.name_sub_categ')
+                         ->get();
 
-    	return $expenses;
+        } else {
+              $expenses = $expensesAux->where('expenses.month', '=', $month)
+                         ->groupBy('expenses.category_id', 'categories.name_categ', 'categories.name_sub_categ')
+                         ->get();
+        }    
+    	 
+       return $expenses;
     }
 
 

@@ -103,7 +103,7 @@ class ExpenseController extends Controller
 
 
     //monta o json para alimentar o gráfico de despesas por categoria
-    public function getJsonChart(){
+    public function getJsonChart($month = null){
 
         $jsonChart = '{
                     "cols": [
@@ -111,7 +111,7 @@ class ExpenseController extends Controller
                         {"id":"","label":"Total","pattern":"","type":"number"}
                     ],
                     "rows": [ ';
-        $expenses = Expense::expensesByCateg();
+        $expenses = Expense::expensesByCateg($month);
         foreach($expenses as $k => $v){
             $jsonChart .= '{"c":[{"v":"'.$v->name_categ.'/'.$v->name_sub_categ.'","f":null},{"v":'.$v->sumCateg.',"f":null}]},';
         }
@@ -132,10 +132,23 @@ class ExpenseController extends Controller
     {
         $expensesMonth['all'] = Expense::expensesDetail($request->month, 2); 
         $expensesMonth['categ'] = Expense::expensesDetail($request->month, 1);
+        $expensesMonth['graf'] = $this->getJsonChart($request->month);
         return response()->json($expensesMonth);
     }
 
     
+    public function printMonthlyDetail(Request $request)
+    {
+        //$expensesMonthDetail = $this->expensesMonthlyDetail($request);
+        //$expensesMonth['all'] = Expense::expensesDetail($request->month, 2); 
+        //$expensesMonth['categ'] = Expense::expensesDetail($request->month, 1);
+        $expensesMonth = Expense::expensesDetail($request->month, 2);
+        var_dump($expensesMonth);
+        echo "---------------";
+       
+        //$pdf = \PDF::loadView('expense.print', ['expenses' => $expensesMonth]);
+        //return $pdf->stream();   
+    }
 
 
     private function findOrder($order)

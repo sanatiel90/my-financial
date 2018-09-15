@@ -32,7 +32,12 @@ Route::get('/expenses/search', 'ExpenseController@search')->name('search_expense
 Route::get('/expenses/jsonChart', 'ExpenseController@getJsonChart');
 Route::get('/expenses/monthly', 'ExpenseController@expensesMonthly')->name('monthly_expenses');
 Route::get('/expenses/monthly/detail', 'ExpenseController@expensesMonthlyDetail');
+Route::get('/expenses/monthly/detail/print', 'ExpenseController@printMonthlyDetail')->name('monthly_print');
 
+Route::get('/testpdf', function(){
+	$pdf = PDF::loadHTML('<h1>School of net</h1>');
+	return $pdf->stream();
+})->name('test_pdf');
 
 Route::group(['middleware' => 'admin'], function(){
 	Route::prefix('category')->group(function(){
