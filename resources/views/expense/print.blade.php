@@ -5,28 +5,28 @@
 	<title>Pdf MyFinancial</title>
 </head>
 <body>
+<h3>Total de despesas por categoria</h3>	
 <table>
-
-
-
-	<br><br><br>
-	<tr>
-		<td>PHP</td>
-		<td>Java</td>
-		<td>JS</td>
-	</tr>
-	<tr>
-		<td>Laravel</td>
-		<td>Spring</td>
-		<td>React</td>
-	</tr>
+	@foreach($expenses['categ'] as $k=>$v)
+		<tr>
+			<td>{{$v->name_categ}}/{{$v->name_sub_categ}}</td>
+			<td>{{$v->sumCateg}}</td>
+		</tr>
+	@endforeach
 </table>
 
-	@foreach($expenses as $k)
-		<p>{{$k->description}}</p>
-
+<h3>Todas as despesas do mês</h3>	
+<table>
+	@foreach($expenses['all'] as $k=>$v)
+		<tr>
+			<td>{{$v->description}}</td>
+			<td>{{$v->value}}</td>
+			<td>{{$v->name_categ}}/{{$v->name_sub_categ}}</td>
+		</tr>
 	@endforeach
+</table>
 
+	
 
 
 </body>

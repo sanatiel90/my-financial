@@ -140,14 +140,12 @@ class ExpenseController extends Controller
     public function printMonthlyDetail(Request $request)
     {
         //$expensesMonthDetail = $this->expensesMonthlyDetail($request);
-        //$expensesMonth['all'] = Expense::expensesDetail($request->month, 2); 
-        //$expensesMonth['categ'] = Expense::expensesDetail($request->month, 1);
-        $expensesMonth = Expense::expensesDetail($request->month, 2);
-        var_dump($expensesMonth);
-        echo "---------------";
-       
-        //$pdf = \PDF::loadView('expense.print', ['expenses' => $expensesMonth]);
-        //return $pdf->stream();   
+        $expensesMonth['all'] = Expense::expensesDetail($request->month, 2); 
+        $expensesMonth['categ'] = Expense::expensesDetail($request->month, 1);
+        //$expensesMonth = Expense::expensesDetail($request->month, 2);
+        
+        $pdf = \PDF::loadView('expense.print', ['expenses' => $expensesMonth]);
+        return $pdf->stream();   
     }
 
 

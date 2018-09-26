@@ -85,7 +85,7 @@
       <div class="modal-footer">
         <form action="{{route('monthly_print')}}" >
             @csrf
-            <input type="hidden" name="month-print" id="inp-print-month">
+            <input type="hidden" name="month" id="inp-print-month">
             <button type="submit" class="btn btn-success" >Imprimir</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
         </form>

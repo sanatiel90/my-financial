@@ -63,7 +63,7 @@ $(document).ready(function(){
 
 		}); //dataJson.done
 
-
+		$('#inp-print-month').val(month);
 		$('#detail-month-title').html(month);
 		$('#detail-month-exp').html(expenses);
 		$('#detail-month-categ').html(categories);
