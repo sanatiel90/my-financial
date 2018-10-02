@@ -56,7 +56,7 @@
 
                                  <label>Total de despesas encontradas: </label> &nbsp; <strong> {{$expenses->total()}} </strong>
                                  &nbsp; &nbsp;
-                                 <label>Valor: </label> &nbsp; <strong> {{$sumExp}} </strong>
+                                 <label>Valor: </label> &nbsp; <strong> {{number_format($sumExp, 2, ',', '.')}} </strong>
                                 
                              </div>
                             </form>

@@ -11,7 +11,14 @@ use App\Libraries\ExpenseFilter;
 
 class ExpenseController extends Controller
 {
-	public function index()
+    //usando middleware('auth') em todas os metodos/rotas de Expenses
+	public function __construct()
+    {
+        return $this->middleware('auth');
+    }
+
+
+    public function index()
     {
     	$categories = Category::orderBy('name_categ')->orderBy('name_sub_categ')->get();
         $filterOptions = new ExpenseFilter(); 
@@ -139,11 +146,12 @@ class ExpenseController extends Controller
     
     public function printMonthlyDetail(Request $request)
     {
-        //$expensesMonthDetail = $this->expensesMonthlyDetail($request);
         $expensesMonth['all'] = Expense::expensesDetail($request->month, 2); 
         $expensesMonth['categ'] = Expense::expensesDetail($request->month, 1);
-        //$expensesMonth = Expense::expensesDetail($request->month, 2);
-        
+        $expensesMonth['user'] = Auth::user()->name;
+        $expensesMonth['total'] =  Expense::where('user_id', Auth::user()->id)->sum('value');
+        $expensesMonth['month'] = $request->month;
+
         $pdf = \PDF::loadView('expense.print', ['expenses' => $expensesMonth]);
         return $pdf->stream();   
     }
