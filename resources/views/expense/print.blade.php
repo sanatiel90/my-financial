@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Pdf MyFinancial</title>
+	<title>PDF MyFinancial</title>
 </head>
 <style type="text/css">
 	.tab-style{
