@@ -122,6 +122,7 @@ class ExpenseController extends Controller
         foreach($expenses as $k => $v){
             $jsonChart .= '{"c":[{"v":"'.$v->name_categ.'/'.$v->name_sub_categ.'","f":null},{"v":'.$v->sumCateg.',"f":null}]},';
         }
+        $jsonChart = substr($jsonChart, 0, -1);
         $jsonChart .= ' ] }';
                   
         return $jsonChart;
