@@ -36,7 +36,7 @@
                                 <div class="row" style="background-color: #90CAF9; margin-top: 3px;">
                                     <div class="col-sm-3">{{ $expense->description }}</div>
                                     <div class="col-sm-2">{{ number_format($expense->value, 2, ',', '.')  }}</div>
-                                    <div class="col-sm-3">{{ $expense->category->name_categ }}/{{ $expense->category->name_sub_categ }}</div>
+                                    <div class="col-sm-3">{{ $expense->category->name_categ }}</div>
                                     <div class="col-sm-2">{{ date('d/m/Y', strtotime($expense->data)) }}</div>
                                     <div class="col-sm-2">
                                         <a href="{{ route('show_expense.expense', $expense) }}" class="btn btn-sm btn-primary"><i class="far fa-edit"></i></a> 

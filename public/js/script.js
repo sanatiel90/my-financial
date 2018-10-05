@@ -30,14 +30,14 @@ $(document).ready(function(){
 				expenses += '<div class="col-md" >'+element['all'][all].description+'</div>';
 				expenses += '<div class="col-md" >'+valor+'</div>';
 				expenses += '<div class="col-md" >'+formatMyDate(element['all'][all].data, '/')+'</div>';
-				expenses += '<div class="col-md" >'+element['all'][all].name_categ+'/'+element['all'][all].name_sub_categ+'</div>'; 				
+				expenses += '<div class="col-md" >'+element['all'][all].name_categ+'</div>'; 				
 				expenses += '</div>';
 			}
 
 			for(var cat in element['categ']){
 				var soma = element['categ'][cat].sumCateg.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 				categories += '<div class="row" style="background-color: #90CAF9; margin-top: 3px;" >';
-				categories += '<div class="col-md" >'+element['categ'][cat].name_categ+'/'+element['categ'][cat].name_sub_categ+'</div>';
+				categories += '<div class="col-md" >'+element['categ'][cat].name_categ+'</div>';
 				categories += '<div class="col-md" >'+soma+'</div>'; 				
 				categories += '</div>';	
 			}	
